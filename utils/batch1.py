@@ -82,23 +82,7 @@ def from_example_list(args, tokenizer, ex_list, device='cpu', train=True, test =
     else:
         batch.labels = None
         batch.tag_ids = None
-        # batch.tag_mask = None
-        
-        my_tag_mask = []
-        tag_mask = [0]*len(batch.lengths)
-        for i in range(len(batch.lengths)):
-            tag_mask[i] = [1] * batch.lengths[i]
-
-        for i in range(len(batch.lengths)):
-            if (len(tag_mask[i])) < pad_size:
-                tag_mask_one = tag_mask[i] + [0] * (pad_size - len(tag_mask[i]) )
-            else:
-                tag_mask_one = tag_mask[i][:pad_size]  
-            my_tag_mask.append(tag_mask_one)
-
-        print('tag_mask ' ,my_tag_mask[2])
-        batch.tag_mask = torch.tensor(my_tag_mask, dtype=torch.float, device=device)
-        
+        batch.tag_mask = None
 
     return batch
 

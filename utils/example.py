@@ -15,7 +15,7 @@ class Example():
 
     @classmethod
     def load_dataset(cls, data_path):
-        datas = json.load(open(data_path, 'r',encoding='utf-8'))
+        datas = json.load(open(data_path, 'r'))
         examples = []
         for data in datas:
             for utt in data:
@@ -36,7 +36,7 @@ class Example():
         self.tags = ['O'] * len(self.utt)
         for slot in self.slot:
             value = self.slot[slot]
-            bidx = self.utt.find(value) #begin index
+            bidx = self.utt.find(value)
             if bidx != -1:
                 self.tags[bidx: bidx + len(value)] = [f'I-{slot}'] * len(value)
                 self.tags[bidx] = f'B-{slot}'
